@@ -1,5 +1,5 @@
 openapi: 3.0.0
-info:
+info:  #contain general information
   title: learn express and swagger - LearnCodeOnline
   description: LCO - a course segment about writing docs
   version: 1.1.0
@@ -18,15 +18,17 @@ servers:
    description: for local host - secure
    variables:
     version:
-     enum:
+     enum:  # enum is used to restricate options
        - v1
        - v2
+     default: v1 #Default version set here
     protocol:
      enum:
        - http
        - https
+     default: http #Default protocol set here
 
-components:
+components:  # it contains authentication
  securitySchemes:
   cokkieAuth: 
     type: apiKey
@@ -36,7 +38,7 @@ components:
       type: http
       scheme: bearer
 
-paths:
+paths:  #contains all the routes
   /lco:
      get:
        tags:
@@ -55,3 +57,28 @@ paths:
           description: Bad request
         500:
           description: internal server error
+  /lcoobject:
+     get:
+       tags:  # tags makes easier to find in list
+        - Object
+       summary: returns a unique course
+       responses:
+        200:
+          description: All good and success
+          content:
+            application/json:
+             schema:
+              type: object
+              properties:
+               id:
+                type: string
+               name:
+                type: string
+               price:
+                type: number
+
+        400:
+          description: Bad request
+        500:
+          description: internal server error
+
