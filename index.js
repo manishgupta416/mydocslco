@@ -31,15 +31,22 @@ app.get("/", (req, res) => {
 });
 
 app.get("/api/v1/lco", (req, res) => {
+  // sending strings
   res.send("hello from lco docs");
 });
 
 app.get("/api/v1/lcoobject", (req, res) => {
+  // sending objects
   res.send({ id: "55", name: "Learn Backend", price: 999 });
 });
 
 app.get("/api/v1/courses", (req, res) => {
+  //sending arrays
   res.send(courses);
+});
+app.get("/api/v1/mycourse/:courseId", (req, res) => {
+  const myCourse = courses.find((course) => course.id === req.params.courseId);
+  res.send(myCourse);
 });
 
 app.listen(4000, () => {
