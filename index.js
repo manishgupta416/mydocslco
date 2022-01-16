@@ -67,6 +67,7 @@ app.get("/api/v1/coursequery", (req, res) => {
   res.send({ location, device });
 });
 app.post("/api/v1/courseupload", (req, res) => {  //handle image /files
+  console.log(req.headers)
   const file = req.files.file;
   let path = __dirname + "/images/" + Date.now() + ".jpg";
   file.mv(path, (err) => {

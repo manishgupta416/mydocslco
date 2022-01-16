@@ -176,6 +176,9 @@ paths:  #contains all the routes
        tags:  # tags makes easier to find in list or group them together (same tags)
         - String
        summary: uploading course images
+       parameters:
+        - in: header
+          name: auth
        requestBody: 
         content:
          multipart/form-data: 
