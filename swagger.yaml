@@ -4,8 +4,8 @@ info:  #contain general information
   description: LCO - a course segment about writing docs
   version: 1.1.0
   contact:
-    email: manish.info2020@gmail.com
-    url: "manishgupta.netlify.app"
+   email: manish.info2020@gmail.com
+   url: "manishgupta.netlify.app"
 
 # servers:
 #  - url: "https://localhost:4000/api/v1"
@@ -112,7 +112,7 @@ paths:  #contains all the routes
        tags:  # tags makes easier to find in list or group them together (same tags)
         - String
        summary: returns a courses based on request id
-       parameters:
+       parameters:  # used for sending parameters 
         - name: courseId
           in: path   # this is important for execution
           required: true
@@ -138,4 +138,90 @@ paths:  #contains all the routes
           description: Bad request
         500:
           description: internal server error
+  /addCourses:
+     post:
+       tags:  # tags makes easier to find in list or group them together (same tags)
+        - String
+       summary: add a new course to existing courses
+       consumes:
+         - application/json
+       produces:
+         - application/json
+       requestBody: 
+        required: true
+        content:
+         application/json: 
+           schema:
+            type: object
+            properties:
+              id:
+               type: string
+              name:
+               type: string
+              price:
+                type: number  
+       responses:
+        200:
+          description: All good and success
+          content:
+            application/json:
+             schema:
+               type: boolean
+        400:
+          description: Bad request
+        500:
+          description: internal server error
+  /courseupload:
+     post:
+       tags:  # tags makes easier to find in list or group them together (same tags)
+        - String
+       summary: uploading course images
+       requestBody: 
+        content:
+         multipart/form-data: 
+           schema:
+            type: object
+            properties:
+              file: 
+               type: string
+               format: binary
+       responses:
+        200:
+          description: All good and success
+        400:
+          description: Bad request
+        500:
+          description: internal server error
+  /coursequery:
+     post:
+       tags:  # tags makes easier to find in list or group them together (same tags)
+        - String
+       summary: trying to learn 
+       parameters:
+         - name: location
+            in: query
+            required: true
+            schema:
+             type: string
+             enum: [delhi, london , patna]
+         - name: device
+            in: query
+            required: true
+            schema:
+             type: string
+             enum: [web , mobile]  
+     responses:
+        200:
+         description: All good and success
+         content:
+          application/json:
+           schema:
+              type: boolean
+        400:
+          description: Bad request
+        500:
+          description: internal server error
+
+
+
 
